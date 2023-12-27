@@ -1,4 +1,4 @@
-# Handwriting-keyboard-for-Linux.
+# Handwriting-keyboard-for-Linux. 
 
 This is programm written for Linux X11 desktop environment.
 
