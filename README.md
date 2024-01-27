@@ -1,3 +1,7 @@
+This branch was moved to separate repository:
+
+[https://github.com/BigIskander/Handwriting-keyboard-for-Linux-tesseract](https://github.com/BigIskander/Handwriting-keyboard-for-Linux-tesseract)
+
 # Experimenting with tesseract
 
 This is experimental, unfinished and not working version of program. For stable version go to main branch.
