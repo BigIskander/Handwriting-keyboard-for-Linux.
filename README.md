@@ -20,7 +20,7 @@ You can change language of recognition by editing this line <code>language: 'zh-
 
 In order to run from code or compile the programm: You need to install [Node.js 18](https://nodejs.org/en) or newer version and [Rust](https://www.rust-lang.org/) as well.
 
-Install Node.js dependencies: <code>npm istall</code>
+Install Node.js dependencies: <code>npm install</code>
 
 Run program in development environment: <code>npm run tauri dev</code>
 
