@@ -23,18 +23,20 @@
     <div>
       <canvas id="can" width="1000" height="200" style="border: 1px solid; cursor: crosshair;"></canvas>
     </div>
-    <div style="margin-bottom: 5px; text-align: left;">
-      <a onclick="choseWord('，')" class="internalLink" href="JavaScript:void(0);" >"，"</a>
-      <a onclick="choseWord('。')" class="internalLink" href="JavaScript:void(0);" >"。"</a>
-      <a onclick="choseWord('“')" class="internalLink" href="JavaScript:void(0);" >"“"</a>
-      <a onclick="choseWord('“')" class="internalLink" href="JavaScript:void(0);" >"”"</a>
-      <a onclick="choseWord('：')" class="internalLink" href="JavaScript:void(0);" >"："</a>
-      <a onclick="choseWord('～')" class="internalLink" href="JavaScript:void(0);" >"～"</a>
-      <a onclick="choseWord('——')" class="internalLink" href="JavaScript:void(0);" >"——"</a>
-      <a onclick="choseWord('……')" class="internalLink" href="JavaScript:void(0);" >"……"</a>
-    </div>
-    <div style="margin-bottom: 5px; text-align: right;">
-      <a onclick="erase()" href="JavaScript:void(0);" class="internalLinkRed">"清空"</a>
+    <div style="display:grid;grid-template-columns: 0.9fr 0.1fr;">
+      <div style="margin-bottom: 5px; text-align: left;">
+        <a onclick="choseWord('，')" class="internalLink" href="JavaScript:void(0);" >"，"</a>
+        <a onclick="choseWord('。')" class="internalLink" href="JavaScript:void(0);" >"。"</a>
+        <a onclick="choseWord('“')" class="internalLink" href="JavaScript:void(0);" >"“"</a>
+        <a onclick="choseWord('“')" class="internalLink" href="JavaScript:void(0);" >"”"</a>
+        <a onclick="choseWord('：')" class="internalLink" href="JavaScript:void(0);" >"："</a>
+        <a onclick="choseWord('～')" class="internalLink" href="JavaScript:void(0);" >"～"</a>
+        <a onclick="choseWord('——')" class="internalLink" href="JavaScript:void(0);" >"——"</a>
+        <a onclick="choseWord('……')" class="internalLink" href="JavaScript:void(0);" >"……"</a>
+      </div>
+      <div style="margin-bottom: 5px; text-align: right;">
+        <a onclick="erase()" href="JavaScript:void(0);" class="internalLinkRed">"清空"</a>
+      </div>
     </div>
   </body>
 </html>
