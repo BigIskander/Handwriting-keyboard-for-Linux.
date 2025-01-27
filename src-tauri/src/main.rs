@@ -12,7 +12,7 @@ fn main() {
                         Currently supports Chinese language only. \n\
                         To recognize handwritten pattern program uses Google API. \n\
                         Github page: \n\
-                        https://github.com/BigIskander/Handwriting-keyboard-for-Linux./tree/main\n\
+                        https://github.com/BigIskander/Handwriting-keyboard-for-Linux./tree/main \n\
                       -------------------------------------------------------------------------------");
             Ok(())
         })
