@@ -2,60 +2,37 @@
   "build": {
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist",
-    "withGlobalTauri": true
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420"
   },
-  "package": {
-    "productName": "handwriting-keyboard",
-    "version": "1.2.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "window": {
-        "all": false,
-        "setPosition": true,
-        "setSize": true
-      },
-      "shell": {
-        "all": false,
-        "execute": true,
-        "scope": [
-          {
-            "name": "xdotool",
-            "cmd": "xdotool",
-            "args": ["key", "--delay", "100", "alt+Tab", "ctrl+v"]
-          }
-        ]
-      },
-      "clipboard": {
-        "all": false,
-        "readText": false,
-        "writeText": true
-      }
-    },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "com.handwriting-keyboard.dev",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "shortDescription": "Handwriting keyboard for Linux.",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "longDescription": "Handwriting keyboard for Linux X11 desktop environment. \n\n Currently supports Chinese language only. \n\n To recognize handwritten pattern program uses Google API. \n\n Github page: \n\n https://github.com/BigIskander/Handwriting-keyboard-for-Linux./tree/main",
+    "category": "Education",
+    "linux": {
       "deb": {
-        "depends": ["xdotool"]
-      },
-      "category": "Education",
-      "longDescription": "Handwriting keyboard for Linux X11 desktop environment. \n\n Currently supports Chinese language only. \n\n To recognize handwritten pattern program uses Google API. \n\n Github page: \n\n https://github.com/BigIskander/Handwriting-keyboard-for-Linux./tree/main",
-      "shortDescription": "Handwriting keyboard for Linux."
-    },
-    "security": {
-      "csp": null
-    },
+        "depends": [
+          "xdotool"
+        ]
+      }
+    }
+  },
+  "productName": "handwriting-keyboard",
+  "mainBinaryName": "handwriting-keyboard",
+  "version": "1.2.0",
+  "identifier": "com.handwriting-keyboard.dev",
+  "plugins": {},
+  "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "fullscreen": false,
@@ -65,8 +42,12 @@
         "height": 300,
         "minWidth": 800,
         "minHeight": 300,
-        "alwaysOnTop": true
+        "alwaysOnTop": true,
+        "useHttpsScheme": true
       }
-    ]
+    ],
+    "security": {
+      "csp": null
+    }
   }
 }

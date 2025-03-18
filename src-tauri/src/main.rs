@@ -3,9 +3,10 @@
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
-
 fn main() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_clipboard_manager::init())
         .setup(|_| {
             println!("-------------------------------------------------------------------------------\n\
                         Handwriting keyboard for Linux X11 desktop environment. \n\

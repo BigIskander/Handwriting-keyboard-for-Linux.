@@ -1,8 +1,10 @@
 import { currentMonitor } from '@tauri-apps/api/window';
-import { appWindow, LogicalSize, LogicalPosition } from '@tauri-apps/api/window';
-import { writeText } from '@tauri-apps/api/clipboard';
-import { Command } from "@tauri-apps/api/shell";
-const pasteword = new Command("xdotool", ['key', "--delay", "100", 'alt+Tab', 'ctrl+v']);
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { LogicalSize, LogicalPosition } from '@tauri-apps/api/dpi';
+import { writeText } from '@tauri-apps/plugin-clipboard-manager';
+import { Command } from "@tauri-apps/plugin-shell";
+const appWindow = getCurrentWebviewWindow()
+const pasteword = Command.create("xdotool", ['key', "--delay", "100", 'alt+Tab', 'ctrl+v']);
 // @ts-ignore
 var out: HTMLElement = document.getElementById('results')
 
@@ -61,7 +63,7 @@ function erase() {
 
 async function choseWord(word: String) {
     await writeText(String(word));
-    pasteword.spawn();
+    pasteword.execute();
     erase();
 }
 
