@@ -5,6 +5,7 @@ import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { Command } from "@tauri-apps/plugin-shell";
 const appWindow = getCurrentWebviewWindow()
 const pasteword = Command.create("xdotool", ['key', "--delay", "100", 'alt+Tab', 'ctrl+v']);
+const pasteword2 = Command.create("xdotool2", ['key', "--delay", "100", 'ctrl+v']);
 // @ts-ignore
 var out: HTMLElement = document.getElementById('results')
 
@@ -68,7 +69,8 @@ function erase() {
 
 async function choseWord(word: String) {
     await writeText(String(word));
-    pasteword.execute();
+    if(await appWindow.isFocused()) pasteword.execute();
+    else pasteword2.execute();
     erase();
 }
 

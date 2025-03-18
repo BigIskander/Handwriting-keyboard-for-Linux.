@@ -24,6 +24,17 @@
           "cmd": "xdotool",
           "name": "xdotool",
           "sidecar": false
+        },
+        {
+          "args": [
+            "key",
+            "--delay",
+            "100",
+            "ctrl+v"
+          ],
+          "cmd": "xdotool",
+          "name": "xdotool2",
+          "sidecar": false
         }
       ]
     },
