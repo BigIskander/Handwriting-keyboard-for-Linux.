@@ -43,7 +43,8 @@
         "minWidth": 800,
         "minHeight": 300,
         "alwaysOnTop": true,
-        "useHttpsScheme": true
+        "useHttpsScheme": true,
+        "focus": false
       }
     ],
     "security": {
