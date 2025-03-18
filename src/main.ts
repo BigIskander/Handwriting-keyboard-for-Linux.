@@ -14,11 +14,16 @@ function recognize() {
 
 function displayRecognizedWords(data: any, err: any) {
     if(err) {
-        out.innerHTML = '<div v-else class="errorMessage">' + err.message + '</div>'
+        out.innerHTML = '<div v-else class="errorMessage">' + 
+                            err.message.replaceAll("<", "&lt;").replaceAll(">", "&gt;") + 
+                        '</div>'
     } else {
         out.innerHTML = ""
         for(var word of data) {
-        out.innerHTML = out.innerHTML + '<div class="selectWordItem" onclick="choseWord(\'' + word + '\')">' + word + '</div>';
+            out.innerHTML = out.innerHTML + 
+                                '<div class="selectWordItem" onclick="choseWord(this.innerText)">' + 
+                                    word.replaceAll("<", "&lt;").replaceAll(">", "&gt;") + 
+                                '</div>';
         }
     }
 }
