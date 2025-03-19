@@ -4,7 +4,7 @@ This is programm written for Linux X11 desktop environment.
 
 Currently supports only Chinese language.
 
-You can find compiled .deb and .AppImage packages in releases page.
+You can find compiled .deb, .rpm and .AppImage packages in releases page.
 
 In order to use the programm xdotool package should be installed: <code>sudo apt install xdotool</code>
 
