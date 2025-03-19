@@ -67,11 +67,11 @@ function erase() {
     out.innerHTML = "";
 }
 
-async function choseWord(word: String) {
+async function choseWord(word: String, is_erase: Boolean = true) {
     await writeText(String(word));
     if(await appWindow.isFocused()) pasteword.execute();
     else pasteword2.execute();
-    erase();
+    if(is_erase) erase();
 }
 
 export {
