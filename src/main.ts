@@ -43,11 +43,17 @@ var bottom_offset = 40;
 var mycan: HTMLElement = document.getElementById('can');
 mycan.setAttribute('width', String(window.outerWidth  - offset));
 mycan.setAttribute('height', String(window.outerHeight  - voffset));
+// @ts-ignore
+var mycan_wrap: HTMLElement = document.getElementById('can_wrapper');
+// @ts-ignore
+mycan_wrap.style.backgroundSize = mycan.height + "px " + mycan.height + "px";
 window.onresize = () => { 
     mycan.setAttribute('width', String(window.outerWidth - offset));
     mycan.setAttribute('height', String(window.outerHeight - voffset));
     can.height = window.outerHeight - voffset;
     can.width = window.outerWidth - offset;
+    // @ts-ignore
+    mycan_wrap.style.backgroundSize = mycan.height + "px " + mycan.height + "px";
 };
 
 // @ts-ignore
