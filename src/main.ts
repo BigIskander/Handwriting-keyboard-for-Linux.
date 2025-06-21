@@ -61,7 +61,7 @@ var can = new handwriting.Canvas(mycan);
 can.setCallBack((data: any, err: any) => displayRecognizedWords(data, err));
 can.setMouseUpCallBack(() => recognize());
 //Set line width shown on the canvas element (default: 3)
-can.setLineWidth(3);
+can.setLineWidth(5);
 //Set options
 can.setOptions({
     language: 'zh-CN',
