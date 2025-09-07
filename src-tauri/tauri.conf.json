@@ -17,20 +17,42 @@
       "icons/icon.ico"
     ],
     "longDescription": "Handwriting keyboard for Linux X11 desktop environment. \n\n Currently supports Chinese language only. \n\n To recognize handwritten pattern program uses Google API. \n\n Github page: \n\n https://github.com/BigIskander/Handwriting-keyboard-for-Linux./tree/main",
-    "category": "Education",
-    "linux": {
-      "deb": {
-        "depends": [
-          "xdotool"
-        ]
-      }
-    }
+    "category": "Education"
   },
   "productName": "handwriting-keyboard",
   "mainBinaryName": "handwriting-keyboard",
-  "version": "1.3.1",
+  "version": "2.0.0",
   "identifier": "com.handwriting-keyboard.dev",
-  "plugins": {},
+  "plugins": {
+    "cli": {
+      "description": "",
+      "longDescription": "",
+      "beforeHelp": "",
+      "afterHelp": "",
+      "args": [
+        {
+          "name": "server-url",
+          "takesValue": true,
+          "description": "Handwriting recognition server's URL, \n default value is Google's API server \n https://www.google.com/inputtools/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8"
+        },
+        {
+          "name": "language",
+          "takesValue": true,
+          "description": "BCP 47 language tag, default value is zh-CN"
+        },
+        {
+          "name": "dark-theme",
+          "takesValue": false,
+          "description": "Use dark theme."
+        },
+        {
+          "name": "use-ydotool",
+          "takesValue": false,
+          "description": "Use ydotool to send keyboard input. By default xdotool is used."
+        }
+      ]
+    }
+  },
   "app": {
     "withGlobalTauri": true,
     "windows": [
