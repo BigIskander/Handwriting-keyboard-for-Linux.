@@ -35,6 +35,57 @@
           "cmd": "xdotool",
           "name": "xdotool2",
           "sidecar": false
+        },
+        {
+          "args": [
+            "key",
+            "--delay",
+            "100",
+            "alt+Tab"
+          ],
+          "cmd": "xdotool",
+          "name": "xdotool3",
+          "sidecar": false
+        },
+        {
+          "args": [
+            "key", 
+            "56:1", 
+            "15:1", 
+            "56:0", 
+            "15:0", 
+            "29:1", 
+            "47:1", 
+            "29:0", 
+            "47:0"
+          ],
+          "cmd": "ydotool",
+          "name": "ydotool",
+          "sidecar": false
+        },
+        {
+          "args": [
+            "key", 
+            "29:1", 
+            "47:1", 
+            "29:0", 
+            "47:0"
+          ],
+          "cmd": "ydotool",
+          "name": "ydotool2",
+          "sidecar": false
+        },
+        {
+          "args": [
+            "key", 
+            "56:1", 
+            "15:1", 
+            "56:0", 
+            "15:0"
+          ],
+          "cmd": "ydotool",
+          "name": "ydotool3",
+          "sidecar": false
         }
       ]
     },

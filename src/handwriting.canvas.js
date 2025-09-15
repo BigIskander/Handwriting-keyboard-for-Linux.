@@ -36,12 +36,13 @@ SOFTWARE.
 
     root.handwriting = handwriting;
 
-    handwriting.Canvas = function(cvs, lineWidth) {
+    handwriting.Canvas = function(cvs, lineWidth = 3, customServerUrl = null) {
         this.canvas = cvs;
         this.cxt = cvs.getContext("2d");
         this.cxt.lineCap = "round";
         this.cxt.lineJoin = "round";
         this.lineWidth = lineWidth || 3;
+        this.serverUrl = customServerUrl || "https://www.google.com/inputtools/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8";
         this.width = cvs.width;
         this.height = cvs.height;
         this.drawing = false;
@@ -66,6 +67,14 @@ SOFTWARE.
         this.callback = undefined;
         this.mouseUpCallBack = undefined;
         this.recognize = handwriting.recognize;
+        // to change stroke color for dark theme
+        this.setStrokeColor = function(color) {
+            this.cxt.strokeStyle = color;
+        }
+        this.setFillStyle = function(color) {
+            this.cxt.fillStyle = color;
+            this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
     };
     /**
      * [toggle_Undo_Redo description]
@@ -289,9 +298,13 @@ SOFTWARE.
 
             }
         });
-        xhr.open("POST", "https://www.google.com/inputtools/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8");
-        xhr.setRequestHeader("content-type", "application/json");
-        xhr.send(data);
+        try {
+            xhr.open("POST", this.serverUrl);
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.send(data);
+        } catch(e) {
+            callback(undefined, new Error(e));
+        }
     };
 
 })(window, document);
