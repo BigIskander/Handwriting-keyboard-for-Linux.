@@ -36,7 +36,7 @@ SOFTWARE.
 
     root.handwriting = handwriting;
 
-    handwriting.Canvas = function(cvs, lineWidth = 3, isDarkTheme = false, customServerUrl = null) {
+    handwriting.Canvas = function(cvs, lineWidth = 3, customServerUrl = null) {
         this.canvas = cvs;
         this.cxt = cvs.getContext("2d");
         this.cxt.lineCap = "round";
@@ -67,6 +67,14 @@ SOFTWARE.
         this.callback = undefined;
         this.mouseUpCallBack = undefined;
         this.recognize = handwriting.recognize;
+        // to change stroke color for dark theme
+        this.setStrokeColor = function(color) {
+            this.cxt.strokeStyle = color;
+        }
+        this.setFillStyle = function(color) {
+            this.cxt.fillStyle = color;
+            this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
     };
     /**
      * [toggle_Undo_Redo description]
