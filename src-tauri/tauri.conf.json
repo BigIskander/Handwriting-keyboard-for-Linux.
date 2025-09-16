@@ -49,6 +49,16 @@
           "name": "use-ydotool",
           "takesValue": false,
           "description": "Use ydotool to send keyboard input. By default xdotool is used."
+        },
+        {
+          "name": "fly-to-bottom",
+          "takesValue": false,
+          "description": "At launch program window will fly to the bottom of the screen \n and resize to screen width."
+        },
+        {
+          "name": "return-keyboard",
+          "takesValue": false,
+          "description": "After sending keyboard input program will trigger alt+Tab keypress \nto return focus back to keyboad's window."
         }
       ]
     }

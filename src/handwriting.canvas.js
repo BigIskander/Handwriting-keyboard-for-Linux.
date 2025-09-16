@@ -67,6 +67,14 @@ SOFTWARE.
         this.callback = undefined;
         this.mouseUpCallBack = undefined;
         this.recognize = handwriting.recognize;
+        // to change stroke color for dark theme
+        this.setStrokeColor = function(color) {
+            this.cxt.strokeStyle = color;
+        }
+        this.setFillStyle = function(color) {
+            this.cxt.fillStyle = color;
+            this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
     };
     /**
      * [toggle_Undo_Redo description]
