@@ -3,6 +3,7 @@
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
+use tauri_plugin_cli::CliExt;
 use gtk::prelude::GtkWindowExt;
 use tauri::Manager;
 use tauri::LogicalSize;
@@ -31,14 +32,66 @@ fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_clipboard_manager::init())
-        .setup(|_| {
+        .plugin(tauri_plugin_cli::init())
+        .setup(|app| {
             println!("-------------------------------------------------------------------------------\n\
-                        Handwriting keyboard for Linux X11 desktop environment. \n\
-                        Currently supports Chinese language only. \n\
-                        To recognize handwritten pattern program uses Google API. \n\
+                        Handwriting keyboard for Linux desktop environment. \n\
+                        To recognize handwritten pattern program uses Google API or \n\
+                        \t Digital ink recognition Server. \n\
                         Github page: \n\
                         https://github.com/BigIskander/Handwriting-keyboard-for-Linux./tree/main \n\
+                        App version: 2.0.0 \n\
+                        \n\
+                        launch app with '--help' command line option to Print help \n\
                       -------------------------------------------------------------------------------");
+            match app.cli().matches() {
+                Ok(matches) => {
+                    // example taken from: https://qiita.com/takavfx/items/4743ceaf9fccc87eac52 
+                    // print --help or CLI options
+                    if let Some(x) = matches.args.get("help").clone() {
+                        println!("  \n\
+                                    Handwriting keyboard for Linux desktop environment. \n\
+                                    How to use the program: \n\
+                                    \n\
+                                    1) write text in the canvas by using mouse or stylus (on graphical tablet) \n\
+                                    2) press 'recognize' button \n\
+                                    3) press to recognized text, programm will \n\
+                                    \t copy it to clipboard and paste by \n\
+                                    \t triggering ctrl+V (or shift+ctrl+V) keypress \n\
+                                    \n\
+                                    To recognize handwritten pattern program uses Google's API Server or \n\
+                                    \t Digital ink recognition Server.
+                                    \n\
+                                    To send the keyboard input programm uses xdotool or ydotool.\n\
+                                    xdotool - only supports X11 desktop environment \n\
+                                    ydotool - works in X11 and Wayland desktop environment \n\
+                                    \t if you decide to use ydotool \n\
+                                    \t ydotoold process should be running in order to ydotool to work \n\
+                                    \n\
+                                    If programs window is in focus, program will trigger alt+Tab keypress \n\
+                                    \t to return focus to previous active window and then send the input
+                                ");
+                        println!("{}", x.value.as_str().unwrap());
+                        app.app_handle().exit(0);
+                        return Ok(());
+                    }
+                    // print --version
+                    if let Some(_) = matches.args.get("version").clone() {
+                        println!("{}, Version: {}",
+                            app.config().product_name.clone().expect("Failed to get product name."),
+                            app.config().version.clone().expect("Failed to get version number.")
+                        );
+                        app.app_handle().exit(0);
+                        return Ok(());
+                    }
+                }
+                Err(err) => { 
+                    println!("Error reading CLI.");
+                    println!("{}", err.to_string());
+                    app.app_handle().exit(1);
+                    return Ok(()); 
+                }
+            } 
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![open_keyboard_window])

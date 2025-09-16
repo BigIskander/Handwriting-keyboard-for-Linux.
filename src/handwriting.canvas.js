@@ -36,12 +36,13 @@ SOFTWARE.
 
     root.handwriting = handwriting;
 
-    handwriting.Canvas = function(cvs, lineWidth) {
+    handwriting.Canvas = function(cvs, lineWidth = 3, customServerUrl = null) {
         this.canvas = cvs;
         this.cxt = cvs.getContext("2d");
         this.cxt.lineCap = "round";
         this.cxt.lineJoin = "round";
         this.lineWidth = lineWidth || 3;
+        this.serverUrl = customServerUrl || "https://www.google.com/inputtools/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8";
         this.width = cvs.width;
         this.height = cvs.height;
         this.drawing = false;
@@ -289,9 +290,13 @@ SOFTWARE.
 
             }
         });
-        xhr.open("POST", "https://www.google.com/inputtools/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8");
-        xhr.setRequestHeader("content-type", "application/json");
-        xhr.send(data);
+        try {
+            xhr.open("POST", this.serverUrl);
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.send(data);
+        } catch(e) {
+            callback(undefined, new Error(e));
+        }
     };
 
 })(window, document);
