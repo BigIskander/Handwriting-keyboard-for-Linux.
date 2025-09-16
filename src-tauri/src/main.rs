@@ -7,6 +7,14 @@ use tauri_plugin_cli::CliExt;
 use gtk::prelude::GtkWindowExt;
 use tauri::Manager;
 use tauri::LogicalSize;
+use tauri::window::Color;
+use std::sync::Mutex;
+
+// dark theme? [value read from CLI]
+static DARK_THEME: Mutex<String> = {
+    let dark_theme = String::new();
+    Mutex::new(dark_theme)
+};
 
 // workaround
 // set_accept_focus(false) property doesn't work in main window
@@ -22,6 +30,10 @@ fn open_keyboard_window(app: tauri::AppHandle) {
     let min_size: LogicalSize<u32> = tauri::LogicalSize::from((800, 300));
     window.set_min_size(Some(min_size)).unwrap();
     window.set_size(min_size).unwrap();
+    let dark_theme = DARK_THEME.lock().unwrap();
+    if !dark_theme.is_empty() {
+        window.set_background_color(Some(Color(0, 0, 0, 0))).unwrap();
+    }
     let gtk_window = window.gtk_window().unwrap();
     gtk_window.set_accept_focus(false);
     window.show().unwrap();
@@ -44,6 +56,7 @@ fn main() {
                         \n\
                         launch app with '--help' command line option to Print help \n\
                       -------------------------------------------------------------------------------");
+            let main_window = app.get_webview_window("main").unwrap();
             match app.cli().matches() {
                 Ok(matches) => {
                     // example taken from: https://qiita.com/takavfx/items/4743ceaf9fccc87eac52 
@@ -57,7 +70,7 @@ fn main() {
                                     2) press 'recognize' button \n\
                                     3) press to recognized text, programm will \n\
                                     \t copy it to clipboard and paste by \n\
-                                    \t triggering ctrl+V (or shift+ctrl+V) keypress \n\
+                                    \t triggering ctrl+V keypress \n\
                                     \n\
                                     To recognize handwritten pattern program uses Google's API Server or \n\
                                     \t Digital ink recognition Server.
@@ -83,6 +96,11 @@ fn main() {
                         );
                         app.app_handle().exit(0);
                         return Ok(());
+                    }
+                    let dark_theme = &matches.args.get("dark-theme").expect("Error reading CLI.").value;
+                    if dark_theme == true {
+                        main_window.set_background_color(Some(Color(0, 0, 0, 0))).unwrap();
+                        DARK_THEME.lock().unwrap().insert_str(0, "ok");
                     }
                 }
                 Err(err) => { 

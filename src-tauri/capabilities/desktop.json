@@ -1,0 +1,13 @@
+{
+  "identifier": "desktop-capability",
+  "platforms": [
+    "linux"
+  ],
+  "windows": [
+    "main",
+    "local"
+  ],
+  "permissions": [
+    "cli:default"
+  ]
+}

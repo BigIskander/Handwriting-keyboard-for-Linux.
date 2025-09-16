@@ -1,10 +1,10 @@
 [package]
 name = "handwriting-keyboard"
-version = "1.3.1"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+version = "2.0.0"
+description = "A Tauri App, Handwriting keyboard for Linux."
+authors = ["Iskander Sultanov"]
+license = "MIT"
+repository = "https://github.com/BigIskander/Handwriting-keyboard-for-Linux."
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -25,3 +25,6 @@ tauri-plugin-cli = "=2.2.0"
 # this feature is used for production builds or when `devPath` points to the filesystem
 # DO NOT REMOVE!!
 custom-protocol = ["tauri/custom-protocol"]
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-cli = "2"
