@@ -123,18 +123,22 @@ function erase() {
 
 async function choseWord(word: String, is_erase: Boolean = true) {
     await writeText(String(word));
-    if(await appWindow.isFocused()) {
-        if(useYdotool) await pastewordY.execute();
-        else await pasteword.execute();
-    } else {
-        if(useYdotool) await pastewordY2.execute();
-        else await pasteword2.execute();
-    }
-    if(returnKeyboard && !(await appWindow.isFocused())) {
-        if(useYdotool) altTabY.execute();
-        else altTab.execute();
-    }
-    if(is_erase) erase();
+    try {
+        if(await appWindow.isFocused()) {
+            if(useYdotool) await pastewordY.execute();
+            else await pasteword.execute();
+        } else {
+            if(useYdotool) await pastewordY2.execute();
+            else await pasteword2.execute();
+        }
+        if(returnKeyboard && !(await appWindow.isFocused())) {
+            if(useYdotool) altTabY.execute();
+            else altTab.execute();
+        }
+        if(is_erase) erase();
+    } catch(err) {
+        displayRecognizedWords("", { message: "Send text input (xdotool or ydotool) error: " + err });
+    }    
 }
 
 export {
