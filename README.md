@@ -123,6 +123,8 @@ Compile the programm:
 npm run tauri build
 ```
 
+There is also version of this program using local OCR engine instead, it is available by this link: [https://github.com/BigIskander/Handwriting-keyboard-for-Linux-tesseract](https://github.com/BigIskander/Handwriting-keyboard-for-Linux-tesseract)
+
 ## Recommended IDE Setup
 
 - [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
