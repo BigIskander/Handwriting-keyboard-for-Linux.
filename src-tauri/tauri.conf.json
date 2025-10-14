@@ -51,6 +51,11 @@
           "description": "Use ydotool to send keyboard input. By default xdotool is used."
         },
         {
+          "name": "use-shift",
+          "takesValue": false,
+          "description": "Trigger shift+ctrl+V keypress to paste text from clipboard. \nBy default program uses ctrl+V."
+        },
+        {
           "name": "fly-to-bottom",
           "takesValue": false,
           "description": "At launch program window will fly to the bottom of the screen \n and resize to screen width."

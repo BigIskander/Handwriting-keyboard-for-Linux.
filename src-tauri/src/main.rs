@@ -70,7 +70,7 @@ fn main() {
                                     2) press 'recognize' button \n\
                                     3) press to recognized text, programm will \n\
                                     \t copy it to clipboard and paste by \n\
-                                    \t triggering ctrl+V keypress \n\
+                                    \t triggering ctrl+V (or shift+ctrl+V) keypress \n\
                                     \n\
                                     To recognize handwritten pattern program uses Google's API Server or \n\
                                     \t Digital ink recognition Server.

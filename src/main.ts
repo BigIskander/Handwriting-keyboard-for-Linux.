@@ -7,6 +7,8 @@ import { Command } from "@tauri-apps/plugin-shell";
 const appWindow = getCurrentWebviewWindow()
 const pasteword = Command.create("xdotool", ['key', "--delay", "100", 'alt+Tab', 'ctrl+v']);
 const pasteword2 = Command.create("xdotool2", ['key', "--delay", "100", 'ctrl+v']);
+const pastewordShift = Command.create("xdotool8", ['key', "--delay", "100", 'alt+Tab', 'shift+ctrl+v']);
+const pastewordShift2 = Command.create("xdotool9", ['key', "--delay", "100", 'shift+ctrl+v']);
 const altTab = Command.create("xdotool3", ['key', '--delay', '100', 'alt+Tab']);
 const backSpace = Command.create("xdotool4", ['key', "--delay", "100", 'alt+Tab', 'BackSpace']);
 const backSpace2 = Command.create("xdotool5", ['key', "--delay", "100", 'BackSpace']);
@@ -14,6 +16,8 @@ const enter = Command.create("xdotool6", ['key', "--delay", "100", 'alt+Tab', 'R
 const enter2 = Command.create("xdotool7", ['key', "--delay", "100", 'Return']);
 const pastewordY = Command.create("ydotool", ['key', '56:1', '15:1', '56:0', '15:0', '29:1', '47:1', '29:0', '47:0']);
 const pastewordY2 = Command.create("ydotool2", ['key', '29:1', '47:1', '29:0', '47:0']);
+const pastewordShiftY = Command.create("ydotool8", ['key', '56:1', '15:1', '56:0', '15:0', '42:1', '29:1', '47:1', '42:0', '29:0', '47:0']);
+const pastewordShiftY2 = Command.create("ydotool9", ['key', '42:1', '29:1', '47:1', '42:0', '29:0', '47:0']);
 const altTabY = Command.create("ydotool3", ['key', '56:1', '15:1', '56:0', '15:0']);
 const backSpaceY = Command.create("ydotool4", ['key', '56:1', '15:1', '56:0', '15:0', '14:1', '14:0']);
 const backSpaceY2 = Command.create("ydotool5", ['key', '14:1', '14:0']);
@@ -25,6 +29,7 @@ var out: HTMLElement = document.getElementById('results')
 var clearButton: HTMLElement = document.getElementById('clearButton')
 var useYdotool = false;
 var returnKeyboard = false;
+var useShift = false;
 
 function recognize() {
     // @ts-ignore
@@ -73,6 +78,7 @@ var can;
     var language = args.args["language"].value || 'zh-CN';
     useYdotool = Boolean(args.args["use-ydotool"].value);
     returnKeyboard = Boolean(args.args["return-keyboard"].value);
+    useShift = Boolean(args.args["use-shift"].value);
     // switch to dark theme
     if(is_dark_theme) {
         document.body.className = 'dark';
@@ -180,11 +186,21 @@ async function choseWord(word: String, is_erase: Boolean = true) {
     await writeText(String(word));
     try {
         if(await appWindow.isFocused()) {
-            if(useYdotool) await pastewordY.execute();
-            else await pasteword.execute();
+            if(useShift) {
+                if(useYdotool) await pastewordShiftY.execute();
+                else await pastewordShift.execute();
+            } else {
+                if(useYdotool) await pastewordY.execute();
+                else await pasteword.execute();
+            }
         } else {
-            if(useYdotool) await pastewordY2.execute();
-            else await pasteword2.execute();
+            if(useShift) {
+                if(useYdotool) await pastewordShiftY2.execute();
+                else await pastewordShift2.execute();
+            } else {
+                if(useYdotool) await pastewordY2.execute();
+                else await pasteword2.execute();
+            }
         }
         if(returnKeyboard && !(await appWindow.isFocused())) {
             if(useYdotool) altTabY.execute();
