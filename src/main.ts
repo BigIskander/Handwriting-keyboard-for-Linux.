@@ -8,17 +8,27 @@ const appWindow = getCurrentWebviewWindow()
 const pasteword = Command.create("xdotool", ['key', "--delay", "100", 'alt+Tab', 'ctrl+v']);
 const pasteword2 = Command.create("xdotool2", ['key', "--delay", "100", 'ctrl+v']);
 const altTab = Command.create("xdotool3", ['key', '--delay', '100', 'alt+Tab']);
+const backSpace = Command.create("xdotool4", ['key', "--delay", "100", 'alt+Tab', 'BackSpace']);
+const backSpace2 = Command.create("xdotool5", ['key', "--delay", "100", 'BackSpace']);
 const pastewordY = Command.create("ydotool", ['key', '56:1', '15:1', '56:0', '15:0', '29:1', '47:1', '29:0', '47:0']);
 const pastewordY2 = Command.create("ydotool2", ['key', '29:1', '47:1', '29:0', '47:0']);
 const altTabY = Command.create("ydotool3", ['key', '56:1', '15:1', '56:0', '15:0']);
+const backSpaceY = Command.create("ydotool4", ['key', '56:1', '15:1', '56:0', '15:0', '14:1', '14:0']);
+const backSpaceY2 = Command.create("ydotool5", ['key', '14:1', '14:0']);
 // @ts-ignore
 var out: HTMLElement = document.getElementById('results')
+// @ts-ignore
+var clearButton: HTMLElement = document.getElementById('clearButton')
 var useYdotool = false;
 var returnKeyboard = false;
 
 function recognize() {
     // @ts-ignore
-    if(can.trace.length > 0) can.recognize()
+    if(can.trace.length > 0) {
+        // @ts-ignore
+        can.recognize()
+        clearButton.innerText = "\"清空\"" // clear canvas
+    }
 }
 
 function displayRecognizedWords(data: any, err: any) {
@@ -115,10 +125,32 @@ var can;
     }
 })();
 
-function erase() {
+async function erase() {
     // @ts-ignore
-    can.erase();
-    out.innerHTML = "";
+    if(can.trace.length > 0) { 
+        // clear canvas
+        // @ts-ignore
+        can.erase();
+        out.innerHTML = "";
+        clearButton.innerText = "\"退格键\"" // BackSpace key
+    } else {
+        // trigger BackSpace keypress
+        try {
+            if(await appWindow.isFocused()) {
+                if(useYdotool) await backSpaceY.execute();
+                else await backSpace.execute();
+            } else {
+                if(useYdotool) await backSpaceY2.execute();
+                else await backSpace2.execute();
+            }
+            if(returnKeyboard && !(await appWindow.isFocused())) {
+                if(useYdotool) altTabY.execute();
+                else altTab.execute();
+            }
+        } catch(err) {
+            displayRecognizedWords("", { message: "Send text input (xdotool or ydotool) error: " + err });
+        }
+    }  
 }
 
 async function choseWord(word: String, is_erase: Boolean = true) {

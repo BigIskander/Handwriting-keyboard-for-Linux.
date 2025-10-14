@@ -49,6 +49,29 @@
         },
         {
           "args": [
+            "key",
+            "--delay",
+            "100",
+            "alt+Tab",
+            "BackSpace"
+          ],
+          "cmd": "xdotool",
+          "name": "xdotool4",
+          "sidecar": false
+        },
+        {
+          "args": [
+            "key",
+            "--delay",
+            "100",
+            "BackSpace"
+          ],
+          "cmd": "xdotool",
+          "name": "xdotool5",
+          "sidecar": false
+        },
+        {
+          "args": [
             "key", 
             "56:1", 
             "15:1", 
@@ -85,6 +108,30 @@
           ],
           "cmd": "ydotool",
           "name": "ydotool3",
+          "sidecar": false
+        },
+        {
+          "args": [
+            "key", 
+            "56:1", 
+            "15:1", 
+            "56:0", 
+            "15:0",
+            "14:1",
+            "14:0"
+          ],
+          "cmd": "ydotool",
+          "name": "ydotool4",
+          "sidecar": false
+        },
+        {
+          "args": [
+            "key", 
+            "14:1",
+            "14:0"
+          ],
+          "cmd": "ydotool",
+          "name": "ydotool5",
           "sidecar": false
         }
       ]
