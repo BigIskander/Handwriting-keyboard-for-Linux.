@@ -10,11 +10,15 @@ const pasteword2 = Command.create("xdotool2", ['key', "--delay", "100", 'ctrl+v'
 const altTab = Command.create("xdotool3", ['key', '--delay', '100', 'alt+Tab']);
 const backSpace = Command.create("xdotool4", ['key', "--delay", "100", 'alt+Tab', 'BackSpace']);
 const backSpace2 = Command.create("xdotool5", ['key', "--delay", "100", 'BackSpace']);
+const enter = Command.create("xdotool6", ['key', "--delay", "100", 'alt+Tab', 'Return']);
+const enter2 = Command.create("xdotool7", ['key', "--delay", "100", 'Return']);
 const pastewordY = Command.create("ydotool", ['key', '56:1', '15:1', '56:0', '15:0', '29:1', '47:1', '29:0', '47:0']);
 const pastewordY2 = Command.create("ydotool2", ['key', '29:1', '47:1', '29:0', '47:0']);
 const altTabY = Command.create("ydotool3", ['key', '56:1', '15:1', '56:0', '15:0']);
 const backSpaceY = Command.create("ydotool4", ['key', '56:1', '15:1', '56:0', '15:0', '14:1', '14:0']);
 const backSpaceY2 = Command.create("ydotool5", ['key', '14:1', '14:0']);
+const enterY = Command.create("ydotool6", ['key', '56:1', '15:1', '56:0', '15:0', '28:1', '28:0']);
+const enterY2 = Command.create("ydotool7", ['key', '28:1', '28:0']);
 // @ts-ignore
 var out: HTMLElement = document.getElementById('results')
 // @ts-ignore
@@ -132,7 +136,7 @@ async function erase() {
         // @ts-ignore
         can.erase();
         out.innerHTML = "";
-        clearButton.innerText = "\"退格键\"" // BackSpace key
+        clearButton.innerText = "退格键" // BackSpace key
     } else {
         // trigger BackSpace keypress
         try {
@@ -151,6 +155,25 @@ async function erase() {
             displayRecognizedWords("", { message: "Send text input (xdotool or ydotool) error: " + err });
         }
     }  
+}
+
+async function enterKeyPress() {
+    // trigger Enter keypress
+    try {
+        if(await appWindow.isFocused()) {
+            if(useYdotool) await enterY.execute();
+            else await enter.execute();
+        } else {
+            if(useYdotool) await enterY2.execute(); 
+            else await enter2.execute();
+        }
+        if(returnKeyboard && !(await appWindow.isFocused())) {
+            if(useYdotool) altTabY.execute();
+            else altTab.execute();
+        }
+    } catch(err) {
+        displayRecognizedWords("", { message: "Send text input (xdotool or ydotool) error: " + err });
+    }
 }
 
 async function choseWord(word: String, is_erase: Boolean = true) {
@@ -175,5 +198,6 @@ async function choseWord(word: String, is_erase: Boolean = true) {
 
 export {
     erase,
+    enterKeyPress,
     choseWord
 }

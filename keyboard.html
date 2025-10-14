@@ -8,6 +8,7 @@
     <script>
       var choseWord
       var erase
+      var enterKeyPress
     </script>
     <script type="module" src="/src/handwriting.canvas.js"></script>
     <script type="module" defer>
@@ -15,6 +16,7 @@
         var main = await import("/src/main.ts");
         choseWord = main.choseWord;
         erase = main.erase;
+        enterKeyPress = main.enterKeyPress
       })();
     </script>
   </head>
@@ -38,7 +40,7 @@
         </div>
         <div style="margin-bottom: 5px; text-align: right;">
           <a id="clearButton" onclick="erase()" href="JavaScript:void(0);" class="internalLinkRed">退格键</a>
-          <a onclick="" href="JavaScript:void(0);" class="internalLink">回车键</a>
+          <a onclick="enterKeyPress()" href="JavaScript:void(0);" class="internalLinkGreen">回车键</a>
         </div>
       </div>
     </div>
