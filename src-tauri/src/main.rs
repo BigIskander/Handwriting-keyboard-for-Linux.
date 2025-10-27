@@ -52,7 +52,7 @@ fn main() {
                         \t Digital ink recognition Server. \n\
                         Github page: \n\
                         https://github.com/BigIskander/Handwriting-keyboard-for-Linux./tree/main \n\
-                        App version: 2.0.0 \n\
+                        App version: 2.1.0 \n\
                         \n\
                         launch app with '--help' command line option to Print help \n\
                       -------------------------------------------------------------------------------");
