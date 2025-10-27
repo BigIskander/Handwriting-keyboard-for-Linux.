@@ -4,7 +4,7 @@ This is programm written for Linux desktop environment.
 
 You can find compiled .deb, .rpm and .AppImage packages in releases page.
 
-This instruction is for version 2 of the program, instruction for versin 1 is in v1 branch.
+This instruction is for version 2.1 of the program. Instruction for version 2.0 is located at v2.0 branch of this repository. Instruction for version 1 is located at v1 branch of this repository.
 
 To recognize handwriting (handwritten text) program uses Google API (default option) or [Digital ink recognition Server](https://github.com/BigIskander/Digital_ink_recognition_Server).
 
@@ -51,6 +51,10 @@ Options:
 
       --use-ydotool...
           Use ydotool to send keyboard input. By default xdotool is used.
+
+      --use-shift...
+          Trigger shift+ctrl+V keypress to paste text from clipboard. 
+          By default program uses ctrl+V.
 
       --fly-to-bottom...
           At launch program window will fly to the bottom of the screen 
